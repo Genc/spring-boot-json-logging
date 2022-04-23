@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-boot-docker-json-logging
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    org.zalando.logbook: trace
+    com.farukgenc.logging: info
+
+logbook:
+  filter.enabled: true
+  secure-filter.enabled: true
+  format.style: json
+  strategy: default
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
