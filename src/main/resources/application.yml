@@ -23,3 +23,8 @@ logbook:
     parameters:
       - access_token
       - password
+
+json-placeholder-api:
+  baseUri: https://jsonplaceholder.typicode.com
+  readTimeout: 5000
+  connectTimeout: 5000

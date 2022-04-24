@@ -207,6 +207,83 @@ Powered by Spring Boot 2.6.6
 
 * You can access the **logback configuration** under **src/main/resources/logback-spring.xml**
 
+## Remote HTTP Request & Response Log With LogbookClientHttpRequestInterceptor
+
+- If you are making a request to an external service in your project and you want to save the request-response logs, Logbook provides this through the interceptor.
+- You should add this interceptor in RestTemplate. You can refer to the src/main/utils/RestTemplateUtils class for configuration.
+
+
+- Remote **HTTP Request** as JSON
+
+```bash
+{
+   "origin":"local",
+   "type":"request",
+   "correlation":"ac715b849543a7ba",
+   "protocol":"HTTP/1.1",
+   "remote":"localhost",
+   "method":"GET",
+   "uri":"https://jsonplaceholder.typicode.com/posts/1",
+   "host":"jsonplaceholder.typicode.com",
+   "path":"/posts/1",
+   "scheme":"https",
+   "port":null,
+   "headers":{
+      "Accept":["application/json, application/*+json"],
+      "Content-Length":["0"],
+      "X-B3-ParentSpanId":["839d390313fab1bb"],
+      "X-B3-Sampled":["1"],
+      "X-B3-SpanId":["cb527443d88d69e4"],
+      "X-B3-TraceId":["839d390313fab1bb"]
+   }
+}
+
+```
+
+- Remote **HTTP Response** as JSON
+
+```bash
+{
+   "origin":"remote",
+   "type":"response",
+   "correlation":"ac715b849543a7ba",
+   "duration":377,
+   "protocol":"HTTP/1.1",
+   "status":200,
+   "headers":{
+      "access-control-allow-credentials":["true"],
+      "age":["11023"],
+      "alt-svc":["h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"],
+      "cache-control":["max-age=43200"],
+      "cf-cache-status":["HIT"],
+      "cf-ray":["700b29b409be92cc-IST"],
+      "content-type":["application/json; charset=utf-8"],
+      "date":["Sun, 24 Apr 2022 01:46:02 GMT"],
+      "etag":["W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\""],
+      "expect-ct":["max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""],
+      "expires":["-1"],
+      "nel":["{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"],
+      "pragma":["no-cache"],
+      "report-to":["{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=yigDmNn1Hc0%2FRZy3xTndUBtghNa9AccugrQ%2F39jPLglrQ9PF6XcN3z%2FyDM5VCZzR8o%2FHmsD03EIPSXD7ktpGk6xXVeafK4zTrv3%2BMwUURdtde8ZC7nAA8Z6SnXk%2F4Xz1eArGweoPtEnVdllVI7gY\"}],\"group\":\"cf-nel\",\"max_age\":604800}"],
+      "server":["cloudflare"],
+      "vary":["Origin, Accept-Encoding"],
+      "via":["1.1 vegur"],
+      "x-content-type-options":["nosniff"],
+      "x-powered-by":["Express"],
+      "x-ratelimit-limit":["1000"],
+      "x-ratelimit-remaining":["999"],
+      "x-ratelimit-reset":["1644363468"]
+   },
+   "body":{
+      "userId":1,
+      "id":1,
+      "title":"sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body":"quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+   }
+}
+
+```
+
 ## Run as Docker Container
 
 You can see Dockerfile in project directory. If you want to create an image you can use Dockerfile.
